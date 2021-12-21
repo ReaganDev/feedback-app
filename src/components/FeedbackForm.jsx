@@ -4,13 +4,14 @@ import Button from './shared/Button'
 import RatingSelect from './RatingSelect'
 import FeedbackContext from './context/FeedbackProvider'
 
-const FeedbackForm = () => {	
+const FeedbackForm = () => {
 	const [text, setText] = useState('')
 	const [rating, setRating] = useState(10)
 	const [btnDisabled, setBtnDisabled] = useState(true)
 	const [message, setMessage] = useState('')
 
-	const { addFeedback, feedbackEdit } = useContext(FeedbackContext)
+	const { addFeedback, updateFeedback, feedbackEdit } =
+		useContext(FeedbackContext)
 
 	useEffect(() => {
 		if (feedbackEdit.edit === true) {
@@ -36,11 +37,15 @@ const FeedbackForm = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault()
 		if (text.trim().length > 10) {
-			const feedback = {rating, text }
-            addFeedback(feedback)
-        }
-        setText('')
-        setRating(10)
+			const feedback = { rating, text }
+			if (feedbackEdit.edit === true) {
+				updateFeedback(feedbackEdit.item.id, feedback)
+			} else {
+				addFeedback(feedback)
+			}
+		}
+		setText('')
+		setRating(10)
 	}
 	return (
 		<Card>
