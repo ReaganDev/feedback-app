@@ -16,13 +16,8 @@
       "text": "This is item three from json server"
     },
     {
-      "rating": 6,
-      "text": "This will go to the json server",
-      "id": 4
-    },
-    {
-      "rating": 10,
-      "text": "This is another test",
+      "rating": 4,
+      "text": "changed rating",
       "id": 5
     }
   ]
